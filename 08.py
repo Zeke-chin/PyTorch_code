@@ -1,6 +1,7 @@
 import numpy as np
 import torch
 from torch.utils.data import Dataset, DataLoader
+import matplotlib.pyplot as plt
 
 
 def work(foo):
@@ -54,7 +55,9 @@ model = Model()
 criterion = torch.nn.BCELoss(reduction='mean')
 # 优化器
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
-
+# 可视化分析
+loss_list = []
+epoch_list = np.arange(0, 100, 1)
 # # 训练模型
 # for epoch in range(100):
 #     for i, data in enumerate(train_loader, 0):
@@ -77,7 +80,15 @@ if __name__ == '__main__':
             # 2. Forward
             y_pred = model(inputs)
             loss = criterion(y_pred, labels)
+            loss_list.append(loss.item())
+
             print(epoch, i, loss.item())
             # 3. Backward optimizer.zero_grad() loss.backward()
             # 4. Update
             optimizer.step()
+
+    plt.plot(epoch_list, loss_list)
+    plt.ylabel('loss')
+    plt.xlabel('epoch')
+    plt.title('sigmoid')
+    plt.show()
