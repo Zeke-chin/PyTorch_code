@@ -4,8 +4,6 @@ from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 
 
-def work(foo):
-    foo.work()
 
 
 
@@ -57,7 +55,7 @@ criterion = torch.nn.BCELoss(reduction='mean')
 optimizer = torch.optim.SGD(model.parameters(), lr=0.1)
 # 可视化分析
 loss_list = []
-epoch_list = np.arange(0, 100, 1)
+epoch_list = np.arange(0, 2400, 1)
 # # 训练模型
 # for epoch in range(100):
 #     for i, data in enumerate(train_loader, 0):
