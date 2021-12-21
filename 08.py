@@ -4,10 +4,6 @@ from torch.utils.data import Dataset, DataLoader
 import matplotlib.pyplot as plt
 
 
-
-
-
-
 # 准备data
 class DiabetesDataset(Dataset):
     def __init__(self, filepath):
