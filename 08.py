@@ -70,7 +70,7 @@ if __name__ == '__main__':
     for epoch in range(100):
         for i, data in enumerate(train_loader, 0):
             # 1. Prepare data
-            inputs, labels = data
+            inputs, labels = data  # x_data y_data
             # 2. Forward
             y_pred = model(inputs)
             loss = criterion(y_pred, labels)
