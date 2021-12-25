@@ -66,6 +66,7 @@ for epoch in range(100):
     # Forward
     y_pred = model(x_data)
     loss = criterion(y_pred, y_data)
+
     loss_list.append(loss.item())
     print(epoch, loss.item())
     # Backward

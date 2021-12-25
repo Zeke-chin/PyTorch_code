@@ -53,7 +53,7 @@ test_loader = DataLoader(dataset=test_dataset,
 # design model using class
 # 设计model
 
-# 简单的神经网络
+# 全链接神经网络
 # class Net(torch.nn.Module):
 #     def __init__(self):
 #         super(Net, self).__init__()
@@ -93,9 +93,9 @@ class Net(torch.nn.Module):
 # 创建model实例
 model = Net()
 
-# # GPU
-# device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-# model.to(device)
+# GPU
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+model.to(device)
 
 # construct loss and optimizer
 # 损失
@@ -112,15 +112,15 @@ def train(epoch):
     for batch_idx, data in enumerate(train_loader, 0):
         # 获得一个批次的数据和标签
         inputs, target = data
-        # # GUP
-        # inputs, target = inputs.to(device), target.to(device)
+        # GUP
+        inputs, target = inputs.to(device), target.to(device)
 
         # 优化器清零
         optimizer.zero_grad()
 
         # forward
-        outputs = model(inputs)  # 获得模型预测结果(64, 10)
-        loss = criterion(outputs, target)  # 交叉熵代价函数outputs(64,10),target（64）
+        outputs = model(inputs)  
+        loss = criterion(outputs, target)
 
         # backward
         loss.backward()
@@ -142,8 +142,8 @@ def test():
         for data in test_loader:
             # 从test_loader拿数据
             images, labels = data
-            # # GPU
-            # inputs, target = inputs.to(device), target.to(device)
+            # GPU
+            inputs, target = inputs.to(device), target.to(device)
 
             # 把值传入model做预测 得到输出矩阵
             outputs = model(images)
@@ -152,7 +152,7 @@ def test():
             # a1, a2= torch.max(input, dim, max=None, max_indices=None) -> (Tensor, LongTensor)
             # a1 最大值 ，a2 最大值下标
             # _ 表示忽略 所以predicted 就是最大值
-            _, predicted = torch.max(outputs.data, dim=1)  # dim = 1 列是第0个维度，行是第1个维度
+            _, predicted = torch.max(outputs.data, dim=1)
 
             #
             total += labels.size(0)
